@@ -75,12 +75,14 @@ $ npm start
 
 ## Screenshots:
 ![](Screenshots/login.png)
-![](Screenshots/portfolio.jpg)
-![](Screenshots/rate.jpg)
-![](Screenshots/review.jpg)
-![](Screenshots/search.jpg)
-![](Screenshots/add_upload.jpg)
-![](Screenshots/edit_portfolio.jpg)
+![](Screenshots/search.png)
+![](Screenshots/rate.png)
+![](Screenshots/review.png)
+![](Screenshots/search.png)
+![](Screenshots/add_upload.png)
+![](Screenshots/edit_portfolio.png)
+
+
 
 ### License
 [MIT]()
