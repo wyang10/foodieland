@@ -32,8 +32,8 @@ Nodejs + Express + MongoDB + HTML5 + Heroku
 
 
 At the `db` folder, we have provided 2 JSON files to be used as a collection for the database.
-1. Foods.json
-2. Users.json
+1. house.json
+2. login.json
 
 #### Creating local database
 Before running the program we first need to create a local database.
@@ -41,11 +41,11 @@ Run the following command in your terminal to start local mongo server: `mongod 
 Keeping the local server running, open a new terminal and run the following to create nomadLocalDB database and import the given JSON files as collections:
 1. Projects collection
 ```
-mongoimport -h localhost:27017 -d foodDB -c Projects --drop --jsonArray --file ./db/Foods.json 
+mongoimport -h localhost:27017 -d foodDB -c login --drop --jsonArray --file ./db/login.json 
 ```
 2. Users collection
 ```
-mongoimport -h localhost:27017 -d foodDB -c Users --drop --jsonArray --file ./db/Users.json 
+mongoimport -h localhost:27017 -d foodDB -c house --drop --jsonArray --file ./db/house.json 
 ```
 NOTE: In `./db/myMongoDB.js` make sure the global constant is saying `DB_NAME = "foodDB"`, otherwise the program cannot find the local database.
 
