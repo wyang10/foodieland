@@ -27,7 +27,7 @@ Nodejs + Express + MongoDB + HTML5 + Heroku
 ## Class Info
 - Class Link: https://johnguerra.co/classes/webDevelopment_fall_2022/
 - Professor: <a href="https://johnguerra.co/"> John Alexis Guerra Gómez </a>
-- Release: <a href="https://cryptic-stream-54472.herokuapp.com/index.html"> Here to Start </a>
+- Release: <a href="https://bloodcurdling-crypt-94860.herokuapp.com/"> Here to Start </a>
 - Demo: <a href="https://www.youtube.com/watch?v=bp1zdDSDM5o"> Video </a>
 
 
@@ -57,7 +57,7 @@ Once the local database has been created, follow these steps to run locally:
 
 ## For simply Clone or Download
 ```terminal
-$ git clone github.com:wyang10/FoodieLand.git
+$ git clone https://github.com/wyang10/Foodieland/
 $ npm start
 
 ```
@@ -97,4 +97,4 @@ Rate
 
 
 ### License
-[MIT]()
+[MIT](LICENSE)
