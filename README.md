@@ -74,7 +74,7 @@ $ npm start
   * routes: Backend javascript files.
 
 ## Screenshots:
-![](Screenshots/login.jpg)
+![](Screenshots/login.png)
 ![](Screenshots/portfolio.jpg)
 ![](Screenshots/rate.jpg)
 ![](Screenshots/review.jpg)
