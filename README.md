@@ -55,7 +55,7 @@ Once the local database has been created, follow these steps to run locally:
 2. Run client server: `npm start`
 3. Using your browser go to localhost: http://locahost:3001/
 
-## Clone or Download
+## For simply Clone or Download
 ```terminal
 $ git clone github.com:wyang10/FoodieLand.git
 $ npm start
