@@ -1,0 +1,54 @@
+.register-wrapper{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url('../public/bg.jpg');
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-size: cover;
+}
+
+.register-box{
+    width: 400px;
+    margin-right: 100px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.6);
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.register-box h1{
+    text-align: center;
+    font-weight: 900;
+}
+
+.register-box .input{
+    padding: 20px 0;
+    width: 100%;
+}
+
+.register-box .input .form-group{
+    width: 100%;
+}
+
+.register-box .bottom{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.register-box .bottom .btn{
+    width: 100%
+}
+
+.alert-danger{
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+}

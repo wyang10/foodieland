@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edit Reviews</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="style/info.css"
+      media="screen"
+    />
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <header class="title">
+        <a href="./home.html">Rate my FoodieHouse</a>
+        <a href="./house.html">Review Portfolio</a>
+      </header>
+      <div class="house-show">
+        <div class="house-list"></div>
+        <div class="comment-input">
+          <form class="form-horizontal">
+            <div class="form-group" style="position: relative">
+              <label for="mark" class="col-sm-1 control-label">Rank:</label>
+              <div class="col-sm-3">
+                <input
+                  type="email"
+                  readonly
+                  class="form-control"
+                  id="mark"
+                  onfocus="onFocus(this)"
+                  placeholder="please choose mark"
+                />
+              </div>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="droptopMenu4"
+                style="left: 100px"
+              >
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+              </ul>
+            </div>
+            <div class="form-group">
+              <label for="comment" class="col-sm-1 control-label"
+                >Comment:</label
+              >
+              <div class="col-sm-11">
+                <textarea
+                  type="email"
+                  class="form-control"
+                  id="comment"
+                  placeholder="please insert your comment"
+                ></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-10 col-sm-10">
+                <a
+                  href="#"
+                  type="submit"
+                  class="btn btn-primary col-sm-2 submit"
+                  >Submit</a
+                >
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <footer class="footer">
+        <p>Copy Rights reserved Design by Audrey Yang & Yuan Wang</p>
+      </footer>
+      <div class="alert alert-danger" role="alert">...</div>
+    </div>
+    <script src="bootstrap/js/jquery-min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+      let dropdown = document.querySelector(".dropdown-menu");
+      let markValue = document.getElementById("mark");
+      let token = sessionStorage.getItem("token");
+      let houseShow = document.querySelector(".house-list");
+      let submitBtn = document.querySelector(".submit");
+      let alertMsg = document.querySelector(".alert-danger");
+      let commentText = document.getElementById("comment");
+      let data = [];
+
+      function onFocus() {
+        dropdown.style.display = "block";
+      }
+
+      window.onload = () => {
+        function getRouterQuery(name) {
+          let regs = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+          let router = window.location.search.substr(1).match(regs);
+          if (router != null) {
+            return unescape(router[2]);
+          }
+          return null;
+        }
+
+        function alertShow(text) {
+          alertMsg.style.display = "block";
+          alertMsg.innerText = text;
+          setTimeout(() => {
+            alertMsg.style.display = "none";
+          }, 1000);
+        }
+
+        function stars(index) {
+          let reg = /.*\..*/;
+          let starsArray = [];
+          if (!!Number(index) === false && index != 0) return;
+          let point = document.createElement("div");
+          let pointShow = document.createElement("div");
+          let count = document.createElement("p");
+          count.innerHTML = Number(index).toFixed(1);
+          point.classList.add("point");
+          pointShow.classList.add("point-show");
+          for (let i = 1; i <= 5; i++) {
+            var image = document.createElement("img");
+            if (i <= Math.floor(index)) {
+              image.src = `public/good.png`;
+              pointShow.appendChild(image);
+            } else if (i == Math.ceil(index) && reg.test(index)) {
+              image.src = "public/half.png";
+              pointShow.appendChild(image);
+            } else {
+              image.src = "public/bad.png";
+              pointShow.appendChild(image);
+            }
+          }
+          pointShow.appendChild(count);
+          point.appendChild(pointShow);
+
+          return point;
+        }
+
+        function starsName(index, name) {
+          let reg = /.*\..*/;
+          let starsArray = [];
+          if (!!Number(index) === false && index !== 0) return;
+          let point = document.createElement("div");
+          let pointShow = document.createElement("div");
+          let count = document.createElement("p");
+          count.innerHTML = name;
+          point.classList.add("point");
+          pointShow.classList.add("point-show");
+          pointShow.appendChild(count);
+          for (let i = 1; i <= 5; i++) {
+            var image = document.createElement("img");
+            if (i <= Math.floor(index)) {
+              image.src = `public/good.png`;
+              pointShow.appendChild(image);
+            } else if (i == Math.ceil(index) && reg.test(index)) {
+              image.src = "public/half.png";
+              pointShow.appendChild(image);
+            } else {
+              image.src = "public/bad.png";
+              pointShow.appendChild(image);
+            }
+          }
+
+          point.appendChild(pointShow);
+
+          return point;
+        }
+
+        function formdate(time) {
+          let date = new Date(time * 1000);
+          return `${date.getFullYear()}-${
+            date.getMonth() >= 9
+              ? date.getMonth() + 1
+              : "0" + date.getMonth() + 1
+          }-${date.getDate() > 9 ? date.getDate() : "0" + date.getDate()}`;
+        }
+
+        function comments(data) {
+          let newData = JSON.parse(data);
+          let list = document.createElement("div");
+          list.classList.add("comment-list");
+          if (newData.length == 0) {
+            return list;
+          }
+          for (let i = 0; i < newData.length; i++) {
+            let item = document.createElement("div");
+            let detail1 = document.createElement("p");
+            let detail2 = document.createElement("p");
+            detail1.innerHTML = newData[i].comment;
+            detail2.innerHTML = formdate(newData[i].time);
+            let starsNode = starsName(newData[i].count, newData[i].name);
+            item.classList.add("comment-list-item");
+            detail1.classList.add("command-detail");
+            detail2.classList.add("command-detail");
+            item.appendChild(starsNode);
+            item.appendChild(detail1);
+            item.appendChild(detail2);
+            list.appendChild(item);
+          }
+          return list;
+        }
+
+        function getArray(data) {
+          let array = JSON.parse(data);
+          if (array.length == 0) {
+            return 0;
+          } else {
+            let arr = [];
+            array.forEach((item) => {
+              arr.push(item.count);
+            });
+            return averageNumber(...arr);
+          }
+        }
+
+        function averageNumber() {
+          let Arr;
+          Arr = Array.from(arguments);
+          let total;
+          total = eval(Arr.join("+"));
+          return total / arguments.length;
+        }
+
+        function domShow(data) {
+          let item = document.createElement("div");
+          let image = document.createElement("img");
+          let houseInfo = document.createElement("div");
+          let title = document.createElement("h2");
+          let address = document.createElement("p");
+          let detail = document.createElement("p");
+          let comment = document.createElement("div");
+          let commentNumber = document.createElement("p");
+
+          title.innerHTML = data[0].name;
+          address.innerHTML = data[0].address;
+          detail.innerHTML = data[0].mark;
+          commentNumber.innerHTML = `Comment: ${
+            JSON.parse(data[0].comment).length
+          }`;
+
+          item.classList.add("house-list-item");
+          image.classList.add("image-show");
+          houseInfo.classList.add("house-info");
+          detail.classList.add("detail");
+          comment.classList.add("command-show");
+          image.src = data[0].image;
+
+          let pointNode = stars(data[0].count);
+          let commentNode = comments(data[0].comment);
+          houseInfo.appendChild(title);
+          houseInfo.appendChild(address);
+          houseInfo.appendChild(pointNode);
+          houseInfo.appendChild(detail);
+          comment.appendChild(commentNumber);
+          comment.appendChild(commentNode);
+          item.appendChild(image);
+          item.appendChild(houseInfo);
+          item.appendChild(comment);
+          houseShow.appendChild(item);
+        }
+
+        $.ajax({
+          url: `http://127.0.0.1:3001/house/info?id=${getRouterQuery("code")}`,
+          type: "get",
+          headers: { token: token },
+          success: (response) => {
+            if (response.success) {
+              if (response.data.length > 0) {
+                data = response.data;
+                domShow(response.data);
+              }
+            } else {
+              if (response.token) {
+                alertShow("token is repired, 2 second will go login page!");
+                setTimeout(() => {
+                  location.replace("/");
+                }, 2000);
+              } else {
+              }
+            }
+          },
+          error: (error) => {},
+        });
+
+        document.body.addEventListener("click", (e) => {
+          if (e.target.id != "mark") {
+            dropdown.style.display = "none";
+          }
+        });
+
+        dropdown.addEventListener("click", (e) => {
+          e.preventDefault();
+          markValue.value = e.target.innerText;
+        });
+
+        submitBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (commentText.value.length == 0) {
+            alertShow("please insert comment!");
+            return;
+          } else if (markValue.value.length == 0) {
+            alertShow("please insert count!");
+            return;
+          }
+
+          let userComment = {
+            time: new Date().getTime() / 1000,
+            name: sessionStorage.getItem("username"),
+            comment: commentText.value,
+            count: markValue.value,
+          };
+
+          let commentList = JSON.parse(data[0].comment);
+          commentList.push(userComment);
+
+          let dataPost = {
+            id: data[0]._id,
+            user: data[0].user,
+            name: data[0].name,
+            address: data[0].address,
+            mark: data[0].mark,
+            image: data[0].image,
+            comment: JSON.stringify(commentList),
+            time: data[0].time,
+            count: getArray(JSON.stringify(commentList)),
+          };
+
+          $.ajax({
+            url: `http://127.0.0.1:3001/house/save`,
+            type: "post",
+            data: dataPost,
+            headers: { token: token },
+            success: (response) => {
+              if (response.success) {
+                location.reload();
+              } else {
+                if (response.token) {
+                  alertShow("token is repired, 2 second will go login page!");
+                  setTimeout(() => {
+                    location.replace("/");
+                  }, 2000);
+                } else {
+                }
+              }
+            },
+            error: (error) => {},
+          });
+        });
+      };
+    </script>
+  </body>
+</html>

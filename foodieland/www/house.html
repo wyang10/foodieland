@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>home</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style/house.css" media="screen">
+</head>
+<body>
+<div class="main-wrapper">
+    <header class="title">
+        <a href="./home.html">My Foodie Portfolio</a>
+        <h2>My Account</h2>
+        <a href="#" class="btn btn-default active addNew" role="button">Add New</a>
+    </header>
+    <div class="house-show">
+
+    </div>
+    <footer class="footer">
+        <p>Copy Rights Reserved Design by Audrey Yang & Yuan Wang</p>
+    </footer>
+    <div class="edit-wrapper">
+        <div class="edit-content">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="Name" class="col-sm-2 control-label">Name:</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="Name" placeholder="please insert your Name"></input>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Address" class="col-sm-2 control-label">Address:</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="Address" placeholder="please insert Address"></input>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Mark" class="col-sm-2 control-label">Mark:</label>
+                    <div class="col-sm-10">
+                        <textarea type="email" style=" resize: none;height: 100px" class="form-control" id="Mark" placeholder="please insert your comment"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Pic" class="col-sm-2 control-label">Picture:</label>
+                    <div id="headPic" class="col-sm-10" id="Pic">
+                        <img id="upload-image" src="./public/all_addpic.png"  style="width: 100px" >
+                        <input type="file" id="fil">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-8 col-sm-10">
+                        <a href="#" type="submit" class="btn btn-primary col-sm-2 submit-btn" style="margin-right:20px ">Submit</a>
+                        <a href="#" type="submit" class="btn btn-danger col-sm-2 cancel-btn">Cancel</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="alert alert-danger" role="alert">...</div>
+    <div class="alert alert-success" role="alert">...</div>
+</div>
+<script src="bootstrap/js/jquery-min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script>
+  let fil = document.querySelector('#fil')
+  let alertMsg = document.querySelector('.alert-danger')
+  let successMsg = document.querySelector('.alert-success')
+  let editWrap = document.querySelector('.edit-wrapper')
+  let addNew = document.querySelector('.addNew')
+  let cancelBtn = document.querySelector('.cancel-btn')
+  let submitBtn = document.querySelector('.submit-btn')
+  let addBtn = document.querySelector('.addNew')
+  let houseShow = document.querySelector('.house-show')
+
+
+  // house info
+  let image = document.querySelector('#upload-image')
+  let name = document.getElementById('Name')
+  let address = document.getElementById('Address')
+  let mark = document.getElementById('Mark')
+
+
+  //token
+  let token = sessionStorage.getItem('token')
+
+
+  // edit type
+  let editType = ''
+  let dataEdit = {}
+
+  function onFocus(){
+    dropdown.style.display = 'block'
+  }
+
+  window.onload = () => {
+
+    function checkEmpty(){
+      if(name.value.length == 0){
+        alertShow('name is empty!')
+        return false
+      }else if(address.value.length == 0){
+        alertShow('address is empty!')
+        return false
+      }else if(image.src.indexOf('all_addpic.png')>-1){
+        alertShow('please upload image')
+        return false
+      }
+      return true
+    }
+
+    function alertShow(text){
+      alertMsg.style.display = 'block'
+      alertMsg.innerText =text
+      setTimeout(()=>{
+        alertMsg.style.display = 'none'
+      }, 1000)
+    }
+
+    function successShow(text){
+      successMsg.style.display = 'block'
+      successMsg.innerText =text
+      setTimeout(()=>{
+        successMsg.style.display = 'none'
+      }, 1000)
+    }
+
+    function emptyList(){
+      editWrap.style.zIndex = -99;
+      if(editType === 'add'){
+        image.src = './public/all_addpic.png'
+        name.value = ''
+        address.value = ''
+        mark.value = ''
+      }
+    }
+
+    function editItem(data){
+      editType = 'edit'
+      dataEdit = data
+      editWrap.style.zIndex = 99;
+      image.src = data.image
+      name.value = data.name
+      address.value = data.address
+      mark.value = data.mark
+    }
+
+    function deleteItem(data){
+      $.ajax({
+        url: `http://127.0.0.1:3001/house/delete?id=${data._id}`,
+        type: 'get',
+        headers:{'token': token},
+        success: (response)=>{
+          if(response.success){
+            successShow('Delete Success!')
+            setTimeout(()=>{
+              location.reload()
+            },1000)
+          }else{
+            if(response.token){
+              alertShow('token is repired, 2 second will go login page!')
+              setTimeout(()=>{
+                location.replace('/')
+              },2000)
+            }else{
+              alertShow(response.msg)
+            }
+          }
+        },
+        error: (error) => {
+          alertShow('error!')
+        }
+      })
+    }
+
+    function domShow(data){
+      let isHouseList = document.querySelector('.house-list')
+      if(isHouseList){
+        isHouseList.remove()
+      }
+      let houseList = document.createElement('div')
+      houseList.classList.add('house-list')
+      for(let i=0;i<data.length;i++){
+        let item = document.createElement('div')
+        let image = document.createElement('div')
+        let houseInfo = document.createElement('div')
+        let title = document.createElement('h2')
+        let address = document.createElement('p')
+        let checkRouter = document.createElement('a')
+        let deleteRouter = document.createElement('a')
+        let btnInfo = document.createElement('div')
+
+        title.innerHTML = data[i].name
+        address.innerHTML = data[i].address
+        checkRouter.innerHTML = 'Edit'
+        deleteRouter.innerHTML = 'Delete'
+
+        checkRouter.classList.add('go-detail')
+        deleteRouter.classList.add('go-delete')
+
+        checkRouter.addEventListener('click',(e)=>{
+          e.preventDefault()
+          editItem(data[i])
+        })
+
+        deleteRouter.addEventListener('click',(e)=>{
+          e.preventDefault()
+          deleteItem(data[i])
+        })
+
+        btnInfo.classList.add('btn-bottom')
+        btnInfo.appendChild(checkRouter)
+        btnInfo.appendChild(deleteRouter)
+        item.classList.add('house-list-item')
+        image.classList.add('image-show')
+        houseInfo.classList.add('house-info')
+        image.style.backgroundImage = `url('${data[i].image}')`
+
+        let pointNode = stars(data[i].count);
+        houseInfo.appendChild(title)
+        houseInfo.appendChild(address)
+        houseInfo.appendChild(pointNode)
+        houseInfo.appendChild(btnInfo)
+        item.appendChild(image)
+        item.appendChild(houseInfo)
+        houseList.appendChild(item)
+      }
+      houseShow.appendChild(houseList)
+    }
+
+    function stars(index){
+
+      let reg = /.*\..*/
+      let starsArray = []
+      if(!!Number(index) === false && index != 0) return;
+      let point = document.createElement('div')
+      let pointShow = document.createElement('div')
+      let count = document.createElement('p')
+      count.innerHTML = Number(index).toFixed(1)
+      point.classList.add('point')
+      pointShow.classList.add('point-show')
+      for(let i=1; i <= 5; i++){
+        var image = document.createElement('img')
+        if(i <= Math.floor(index)){
+          image.src = `public/good.png`
+          pointShow.appendChild(image)
+        }else if(i == Math.ceil(index) && reg.test(index)){
+          image.src = 'public/half.png'
+          pointShow.appendChild(image)
+        }else{
+          image.src = 'public/bad.png'
+          pointShow.appendChild(image)
+        }
+      }
+      pointShow.appendChild(count)
+      point.appendChild(pointShow)
+
+      return point;
+    }
+
+
+    addBtn.addEventListener('click', (e) => {
+      e.preventDefault()
+    })
+
+    fil.addEventListener('change', (e) => {
+      let files = e.target.files[0]
+      if(files.type != 'image/jpeg' && files.type != 'image/png' && files.type != 'image/jgp'){
+        alertShow('please upload image file')
+      }
+      let file = new FormData();
+      file.append('files', files)
+      // use ajax
+      let xhr = new XMLHttpRequest()
+      xhr.open('post', 'http://127.0.0.1:3001/api/upload')
+      xhr.setRequestHeader('token', token)
+      xhr.send(file)
+      xhr.onreadystatechange = () => {
+        if(xhr.readyState == 4 && xhr.status == 200){
+          let data = JSON.parse(xhr.responseText)
+          if(data.token){
+            alertShow('token is repired, 2 second will go login page!')
+            setTimeout(()=>{
+              location.replace('/')
+            },2000)
+          }
+          image.src=`./public/${data.path}`
+        }
+      }
+    })
+
+    addNew.addEventListener('click', (e) => {
+      e.preventDefault();
+      editType = 'add'
+      editWrap.style.zIndex = 99;
+    })
+
+    cancelBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      emptyList()
+    })
+
+    submitBtn.addEventListener('click', (e) => {
+      e.preventDefault()
+      if(checkEmpty()){
+        let dataNew = {
+          user: sessionStorage.getItem('username'),
+          name: name.value,
+          mark: mark.value || '',
+          address: address.value,
+          image: image.src
+        }
+        emptyList()
+        if(editType == 'add'){
+          $.ajax({
+            url: 'http://127.0.0.1:3001/house/add',
+            type: 'post',
+            data: dataNew,
+            headers:{'token': token},
+            success: (response)=>{
+              if(response.success){
+                successShow('Add Success!')
+              }else{
+                if(response.token){
+                  alertShow('token is repired, 2 second will go login page!')
+                  setTimeout(()=>{
+                    location.replace('/')
+                  },2000)
+                }else{
+                  alertShow(response.msg)
+                }
+              }
+            },
+            error: (error) => {
+              alertShow('error!')
+            }
+          })
+        }else{
+          let dataPost = {
+            id: dataEdit._id,
+            user: dataEdit.user,
+            name: name.value,
+            address: address.value,
+            mark: mark.value,
+            image: image.src,
+            comment: dataEdit.comment,
+            time: dataEdit.time,
+            count: dataEdit.count,
+            createUser: dataEdit.createUser
+          }
+
+          $.ajax({
+            url: `http://127.0.0.1:3001/house/save`,
+            type: 'post',
+            data: dataPost,
+            headers: {'token': token},
+            success: (response) => {
+              if (response.success) {
+                location.reload()
+              } else {
+                if (response.token) {
+                  alertShow('token is repired, 2 second will go login page!')
+                  setTimeout(()=>{
+                    location.replace('/')
+                  },2000)
+                } else {
+
+                }
+              }
+            },
+            error: (error) => {
+
+            }
+          })
+        }
+
+      }
+    })
+
+    $.ajax({
+      url: 'http://127.0.0.1:3001/house/mine',
+      type: 'get',
+      headers:{'token': token},
+      success: (response)=>{
+        if(response.success){
+          successShow('Get Success!')
+          domShow(response.data)
+        }else{
+          if(response.token){
+            alertShow('token is repired, 2 second will go login page!')
+            setTimeout(()=>{
+              location.replace('/')
+            },2000)
+          }else{
+            alertShow(response.msg)
+          }
+        }
+      },
+      error: (error) => {
+        alertShow('error!')
+      }
+    })
+
+  }
+</script>
+</body>
+</html>

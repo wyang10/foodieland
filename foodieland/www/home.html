@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My FoodieLand</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="style/home.css"
+      media="screen"
+    />
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <header class="title">
+        <a href="./house.html">Edit Foodie Portfolio</a>
+        <div class="col-lg-4">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="search-key"
+              placeholder="Search for review"
+            />
+            <span class="input-group-btn">
+              <div href="#" class="btn btn-default search-btn" type="button">
+                Search Foodie
+              </div>
+            </span>
+          </div>
+        </div>
+        <a href="#" class="btn btn-default active logout" role="button"
+          >Logout</a
+        >
+      </header>
+      <div class="house-show"></div>
+      <footer class="footer">
+        <p>Copy Rights Reserved Design by Audrey Yang & Yuan Wang</p>
+      </footer>
+      <div class="alert alert-danger" role="alert">...</div>
+    </div>
+    <script src="bootstrap/js/jquery-min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+      window.onload = () => {
+        let logoutBtn = document.querySelector(".logout");
+        let token = sessionStorage.getItem("token");
+        let search = document.querySelector(".search-btn");
+        let keyword = document.querySelector("#search-key");
+        let houseShow = document.querySelector(".house-show");
+        let alertMsg = document.querySelector(".alert-danger");
+
+        logoutBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          sessionStorage.removeItem("username");
+          sessionStorage.removeItem("token");
+          window.location.replace("/");
+        });
+
+        function alertShow(text) {
+          alertMsg.style.display = "block";
+          alertMsg.innerText = text;
+          setTimeout(() => {
+            alertMsg.style.display = "none";
+          }, 2000);
+        }
+
+        search.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (keyword.length == 0) return;
+          $.ajax({
+            url: `http://127.0.0.1:3001/house/get?name=${keyword.value}`,
+            type: "get",
+            headers: { token: token },
+            success: (response) => {
+              if (response.success) {
+                domShow(response.data);
+              } else {
+                if (response.token) {
+                  alertShow("token is repired, 1 second will go login page!");
+                  setTimeout(() => {
+                    location.replace("/");
+                  }, 2000);
+                } else {
+                }
+              }
+            },
+            error: (error) => {},
+          });
+        });
+
+        function stars(index) {
+          let reg = /.*\..*/;
+          let starsArray = [];
+          if (!!Number(index) === false && index != 0) return;
+          let point = document.createElement("div");
+          let pointShow = document.createElement("div");
+          let count = document.createElement("p");
+          count.innerHTML = Number(index).toFixed(1);
+          point.classList.add("point");
+          pointShow.classList.add("point-show");
+          for (let i = 1; i <= 5; i++) {
+            var image = document.createElement("img");
+            if (i <= Math.floor(index)) {
+              image.src = `public/good.png`;
+              pointShow.appendChild(image);
+            } else if (i == Math.ceil(index) && reg.test(index)) {
+              image.src = "public/half.png";
+              pointShow.appendChild(image);
+            } else {
+              image.src = "public/bad.png";
+              pointShow.appendChild(image);
+            }
+          }
+          pointShow.appendChild(count);
+          point.appendChild(pointShow);
+
+          return point;
+        }
+
+        function domShow(data) {
+          let isHouseList = document.querySelector(".house-list");
+          if (isHouseList) {
+            isHouseList.remove();
+          }
+          let houseList = document.createElement("div");
+          houseList.classList.add("house-list");
+          for (let i = 0; i < data.length; i++) {
+            let item = document.createElement("div");
+            let image = document.createElement("div");
+            let houseInfo = document.createElement("div");
+            let title = document.createElement("h2");
+            let address = document.createElement("p");
+            let checkRouter = document.createElement("a");
+
+            title.innerHTML = data[i].name;
+            address.innerHTML = data[i].address;
+            checkRouter.href = `./info.html?code=${data[i]._id}`;
+            checkRouter.innerHTML = "View";
+
+            checkRouter.classList.add("go-detail");
+            item.classList.add("house-list-item");
+            image.classList.add("image-show");
+            houseInfo.classList.add("house-info");
+            image.style.backgroundImage = `url('${data[i].image}')`;
+
+            let pointNode = stars(data[i].count);
+            houseInfo.appendChild(title);
+            houseInfo.appendChild(address);
+            houseInfo.appendChild(pointNode);
+            houseInfo.appendChild(checkRouter);
+            item.appendChild(image);
+            item.appendChild(houseInfo);
+            houseList.appendChild(item);
+          }
+          houseShow.appendChild(houseList);
+        }
+
+        $.ajax({
+          url: "http://127.0.0.1:3001/house/all",
+          type: "get",
+          headers: { token: token },
+          success: (response) => {
+            if (response.success) {
+              if (response.data.length > 0) {
+                domShow(response.data);
+              }
+            } else {
+              if (response.token) {
+                alertShow("token is repired, 1 second will go login page!");
+                setTimeout(() => {
+                  location.replace("/");
+                }, 2000);
+              } else {
+              }
+            }
+          },
+          error: (error) => {},
+        });
+      };
+    </script>
+  </body>
+</html>

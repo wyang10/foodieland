@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>register</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="style/register.css"
+      media="screen"
+    />
+  </head>
+  <body>
+    <div class="register-wrapper">
+      <div class="alert alert-danger" role="alert">
+        <a href="#" class="alert-link">...</a>
+      </div>
+      <form class="register-box">
+        <h1>FoodieLand</h1>
+        <div class="input">
+          <div class="form-group">
+            <label for="Username">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Username"
+              name="username"
+              placeholder="please inter your username"
+            />
+          </div>
+          <div class="form-group">
+            <label for="Password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              placeholder="please inter your password"
+            />
+          </div>
+        </div>
+        <div class="bottom">
+          <a
+            href="#"
+            class="btn btn-primary btn-lg active register"
+            role="button"
+            >Register</a
+          >
+        </div>
+      </form>
+    </div>
+    <script src="bootstrap/js/jquery-min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+      window.onload = () => {
+        let registerBtn = document.querySelector(".register");
+        let errorMsg = document.querySelector(".alert-danger");
+        let username = document.getElementById("Username");
+        let password = document.getElementById("password");
+
+        registerBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (username.value && password.value) {
+            let data = {
+              username: username.value,
+              password: password.value,
+            };
+            $.post("http://127.0.0.1:3001/user/register", data, (response) => {
+              if (response.success) {
+                window.location.replace("/");
+              } else {
+                errorMsg.childNodes[1].innerText = response.msg;
+                errorMsg.style.display = "block";
+                setTimeout(() => {
+                  errorMsg.style.display = "none";
+                }, 2000);
+              }
+            });
+          } else {
+            errorMsg.childNodes[1].innerText =
+              "please insert username or password";
+            errorMsg.style.display = "block";
+            setTimeout(() => {
+              errorMsg.style.display = "none";
+            }, 2000);
+          }
+        });
+      };
+    </script>
+  </body>
+</html>

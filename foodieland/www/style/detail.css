@@ -1,0 +1,124 @@
+/***
+
+Copyright (c) <2022-10-27> <copyright holders>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sub license, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+***/
+
+
+.detail-wrapper{
+    width: 100vw;
+    height: 100%;
+}
+
+
+
+.detail-wrapper .house-list{
+    height: calc(100% - 50px);
+    overflow: scroll;
+}
+
+.detail-wrapper .house-list .house-list-item{
+    overflow: hidden;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.detail-wrapper .house-list .house-list-item .house-info{
+    padding: 10px;
+}
+
+.detail-wrapper .house-list .house-list-item .house-info .point,
+.detail-wrapper .house-list .house-list-item .house-info .point .point-show,
+.detail-wrapper .house-info .command-show .comment-list .comment-list-item .point-show{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.detail-wrapper .house-list .house-list-item .house-info .point .point-show{
+    margin-top: 10px;
+}
+
+
+
+.detail-wrapper .house-list .house-list-item .house-info .point .point-show p,
+.detail-wrapper .house-info .command-show .comment-list .comment-list-item .point-show p{
+    margin-left: 10px;
+}
+
+.detail-wrapper .house-list .house-list-item .house-info .point .point-show img,
+.detail-wrapper .house-info .command-show .comment-list .comment-list-item .point-show img{
+    width: 20px;
+}
+
+.detail-wrapper .house-list .house-list-item .house-info > h2{
+    text-align: left;
+    font-size: 1.4rem;
+    color: #000;
+    font-weight: 700;
+}
+
+.detail-wrapper .house-list .house-list-item .house-info > p{
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #666;
+}
+
+.detail-wrapper .house-list .house-list-item .house-info .go-detail{
+    width: 100%;
+    text-align: right;
+    font-size: 2rem;
+}
+
+.detail-wrapper .house-list .house-list-item .house-info .detail{
+    margin-top: 10px;
+    line-height: 1.5rem;
+    font-size: .9rem;
+    color: #999
+}
+
+
+.detail-wrapper .house-list .house-list-item .image-show{
+    background-image:url('https://p9.itc.cn/q_70/images03/20210706/4fc2c76e1cea4e1c9115d7c2c4ea5559.png');
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+}
+
+.detail-wrapper .house-list .house-info .command-show{
+    margin-top: 20px;
+}
+
+.detail-wrapper .house-list .house-info .command-show .title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    height: 50px;
+}
+
+.detail-wrapper .house-list .house-info .command-show .title span{
+    padding: 6px 10px;
+    background: rgb(74,44,254);
+    color: #fff;
+    border-radius: 40px;
+}
+
+.detail-wrapper .house-list .house-info .command-show h2{
+    text-align: left;
+}
+
+.detail-wrapper .house-info .command-show .comment-list .comment-list-item{
+    padding: 15px 10px;
+    border-bottom: 1px dashed #eee;
+}
+
+.detail-wrapper .house-info .command-show .comment-list .comment-list-item>p{
+    margin-top: 15px;
+}

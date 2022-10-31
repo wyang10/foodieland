@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="style/h5_login.css"
+      media="screen"
+    />
+  </head>
+  <body>
+    <div class="login-wrapper">
+      <div class="alert alert-danger" role="alert">
+        <a href="#" class="alert-link">...</a>
+      </div>
+      <form class="login-box">
+        <h1>FoodieLand</h1>
+        <div class="input">
+          <div class="form-group">
+            <label for="Username">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Username"
+              name="username"
+              placeholder="please inter your username"
+            />
+          </div>
+          <div class="form-group">
+            <label for="Password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              placeholder="please inter your password"
+            />
+          </div>
+        </div>
+        <div class="bottom">
+          <a href="#" class="btn btn-primary btn-lg active login" role="button"
+            >Login</a
+          >
+          <a
+            href="./register.html"
+            class="btn btn-default btn-lg active"
+            role="button"
+            >Register</a
+          >
+        </div>
+      </form>
+    </div>
+    <script src="bootstrap/js/jquery-min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+      window.onload = () => {
+        let loginBtn = document.querySelector(".login");
+        let errorMsg = document.querySelector(".alert-danger");
+        let username = document.getElementById("Username");
+        let password = document.getElementById("password");
+
+        loginBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (username.value && password.value) {
+            let data = {
+              username: username.value,
+              password: password.value,
+            };
+            $.post("http://127.0.0.1:3001/user/login", data, (response) => {
+              if (response.success) {
+                sessionStorage.setItem("username", response.username);
+                sessionStorage.setItem("token", response.token);
+                window.location.replace("./home.html");
+              } else {
+                errorMsg.childNodes[1].innerText = response.msg;
+                errorMsg.style.display = "block";
+                setTimeout(() => {
+                  errorMsg.style.display = "none";
+                }, 2000);
+              }
+            });
+          } else {
+            errorMsg.childNodes[1].innerText =
+              "please insert username or password";
+            errorMsg.style.display = "block";
+            setTimeout(() => {
+              errorMsg.style.display = "none";
+            }, 2000);
+          }
+        });
+      };
+    </script>
+  </body>
+</html>

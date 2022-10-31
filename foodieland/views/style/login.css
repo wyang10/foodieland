@@ -1,0 +1,37 @@
+.login-wrapper{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-image: linear-gradient(rgb(74,44,254), rgb(182, 87, 251));
+}
+
+.login-box{
+    width: 70vw;
+    margin: 10vh auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-box h1{
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: rgba(255,255,255,.8)
+}
+
+.login-box input{
+    width: 100%;
+    line-height: 2rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+    border-radius: 2rem;
+    padding-left: 1rem;
+    background: rgba(255,255,255,.3);
+    color: #fff;
+}
+
+.login-box input::placeholder{
+    color: #ffffff;
+}
