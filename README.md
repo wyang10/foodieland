@@ -30,6 +30,31 @@ Nodejs + Express + MongoDB + HTML5 + Heroku
 - Release: <a href="https://cryptic-stream-54472.herokuapp.com/index.html"> Here to Start </a>
 - Demo: <a href=""> Video </a>
 
+
+At the `db` folder, we have provided 2 JSON files to be used as a collection for the database.
+1. Foods.json
+2. Users.json
+
+#### Creating local database
+Before running the program we first need to create a local database.
+Run the following command in your terminal to start local mongo server: `mongod --dbpath ~/data/db`
+Keeping the local server running, open a new terminal and run the following to create nomadLocalDB database and import the given JSON files as collections:
+1. Projects collection
+```
+mongoimport -h localhost:27017 -d foodDB -c Projects --drop --jsonArray --file ./db/Foods.json 
+```
+2. Users collection
+```
+mongoimport -h localhost:27017 -d foodDB -c Users --drop --jsonArray --file ./db/Users.json 
+```
+NOTE: In `./db/myMongoDB.js` make sure the global constant is saying `DB_NAME = "foodDB"`, otherwise the program cannot find the local database.
+
+#### Running locally
+Once the local database has been created, follow these steps to run locally:
+1. Run Mongo server: `mongod --dbpath ~/data/db`
+2. Run client server: `npm start`
+3. Using your browser go to localhost: http://locahost:3001/
+
 ## Clone or Download
 ```terminal
 $ git clone github.com:wyang10/FoodieLand.git
