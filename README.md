@@ -73,15 +73,27 @@ $ npm start
   * public: Static files. Include frontend javascript, html files and corresponding css files.
   * routes: Backend javascript files.
 
-## Screenshots:
+## Screenshots Preview:
+Login
 ![](Screenshots/login.png)
-![](Screenshots/search.png)
-![](Screenshots/rate.png)
-![](Screenshots/review.png)
-![](Screenshots/search.png)
-![](Screenshots/add_upload.png)
+
+Edit Portfolio
 ![](Screenshots/edit_portfolio.png)
 
+Add review/ Upload photo
+![](Screenshots/add_upload.png)
+
+Review
+![](Screenshots/review.png)
+
+Portfolio
+![](Screenshots/portfolio.png)
+
+Search
+![](Screenshots/search.png)
+
+Rate
+![](Screenshots/rate.png)
 
 
 ### License
