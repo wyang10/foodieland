@@ -32,7 +32,7 @@ Nodejs + Express + MongoDB + HTML5 + Heroku
 
 
 At the `db` folder, we have provided 2 JSON files to be used as a collection for the database.
-1. house.json
+1. foodiehouse.json
 2. login.json
 
 #### Creating local database
@@ -45,7 +45,7 @@ mongoimport -h localhost:27017 -d foodDB -c login --drop --jsonArray --file ./db
 ```
 2. Users collection
 ```
-mongoimport -h localhost:27017 -d foodDB -c house --drop --jsonArray --file ./db/house.json 
+mongoimport -h localhost:27017 -d foodDB -c foodiehouse --drop --jsonArray --file ./db/foodiehouse.json 
 ```
 NOTE: In `./db/myMongoDB.js` make sure the global constant is saying `DB_NAME = "foodDB"`, otherwise the program cannot find the local database.
 
