@@ -27,7 +27,7 @@ Nodejs + Express + MongoDB + HTML5 + Heroku
 ## Class Info
 - Class Link: https://johnguerra.co/classes/webDevelopment_fall_2022/
 - Professor: <a href="https://johnguerra.co/"> John Alexis Guerra Gómez </a>
-- Release: <a href="https://cryptic-stream-54472.herokuapp.com/index.html"> Here to Start </a>
+- Release: <a href="https://bloodcurdling-crypt-94860.herokuapp.com/"> Here to Start </a>
 - Demo: <a href="https://www.youtube.com/watch?v=bp1zdDSDM5o"> Video </a>
 
 
@@ -55,9 +55,9 @@ Once the local database has been created, follow these steps to run locally:
 2. Run client server: `npm start`
 3. Using your browser go to localhost: http://locahost:3001/
 
-## Clone or Download
+## For simply Clone or Download
 ```terminal
-$ git clone github.com:wyang10/FoodieLand.git
+$ git clone git@github.com:wyang10/Foodieland.git
 $ npm start
 
 ```
@@ -73,14 +73,28 @@ $ npm start
   * public: Static files. Include frontend javascript, html files and corresponding css files.
   * routes: Backend javascript files.
 
-## Screenshots:
-![](Screenshots/login.jpg)
-![](Screenshots/portfolio.jpg)
-![](Screenshots/rate.jpg)
-![](Screenshots/review.jpg)
-![](Screenshots/search.jpg)
-![](Screenshots/add_upload.jpg)
-![](Screenshots/edit_portfolio.jpg)
+## Screenshots Preview:
+Login
+![](Screenshots/login.png)
+
+Edit Portfolio
+![](Screenshots/edit_portfolio.png)
+
+Add review/ Upload photo
+![](Screenshots/add_upload.png)
+
+Review
+![](Screenshots/review.png)
+
+Portfolio
+![](Screenshots/portfolio.png)
+
+Search
+![](Screenshots/search.png)
+
+Rate
+![](Screenshots/rate.png)
+
 
 ### License
-[MIT]()
+[MIT](LICENSE)
