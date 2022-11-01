@@ -57,7 +57,7 @@ Once the local database has been created, follow these steps to run locally:
 
 ## For simply Clone or Download
 ```terminal
-$ git clone https://github.com/wyang10/Foodieland/
+$ git clone git@github.com:wyang10/Foodieland.git
 $ npm start
 
 ```
