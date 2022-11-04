@@ -18,6 +18,37 @@ Nodejs + Express + MongoDB + HTML5 + Heroku
 - Registered users submit content to the site such as links, text posts, images which are then voted stars by other members. 
 - Allowed user implement CRUD operations on it. The collections in the database would be based on the length from the user's current location and the numeric ranking of the chosen restaurant.
 
+## Design Mockup:
+[Link to Design-Mockup](Design-Mockup.pdf)
+
+## Screenshots Preview:
+Login
+![](Screenshots/login.png)
+
+Edit Portfolio
+![](Screenshots/edit_portfolio.png)
+
+Add review/ Upload photo
+![](Screenshots/add_upload.png)
+
+
+
+Review
+![](Screenshots/review.png)
+
+Portfolio
+![](Screenshots/portfolio.png)
+
+Search
+![](Screenshots/search.png)
+
+Rate
+![](Screenshots/rate.png)
+
+
+### License
+[MIT](LICENSE)
+
 ## Functionalities
 - User can login and sign up (sign out) account. @Yuan Wang
 - User can add/delete restaurants with address, upload pictures, and write reviews. @Weihong Yang
@@ -29,6 +60,7 @@ Nodejs + Express + MongoDB + HTML5 + Heroku
 - Professor: <a href="https://johnguerra.co/"> John Alexis Guerra Gómez </a>
 - Release: <a href="https://bloodcurdling-crypt-94860.herokuapp.com/"> Here to Start </a>
 - Demo: <a href="https://www.youtube.com/watch?v=bp1zdDSDM5o"> Video </a>
+
 
 
 At the `db` folder, we have provided 2 JSON files to be used as a collection for the database.
@@ -73,28 +105,4 @@ $ npm start
   * public: Static files. Include frontend javascript, html files and corresponding css files.
   * routes: Backend javascript files.
 
-## Screenshots Preview:
-Login
-![](Screenshots/login.png)
 
-Edit Portfolio
-![](Screenshots/edit_portfolio.png)
-
-Add review/ Upload photo
-![](Screenshots/add_upload.png)
-
-Review
-![](Screenshots/review.png)
-
-Portfolio
-![](Screenshots/portfolio.png)
-
-Search
-![](Screenshots/search.png)
-
-Rate
-![](Screenshots/rate.png)
-
-
-### License
-[MIT](LICENSE)
