@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN">  maybe this template is imported with Chinese charaters, still don't forget to change it to "En" next time to avoid rendering issues
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -69,7 +69,7 @@
               password: password.value,
             };
             $.post("http://127.0.0.1:3001/user/register", data, (response) => {
-              if (response.success) {
+              if (response.success) {               please don't hard code the adress into the code as the env in everyone's computer is slightly different, just leave a comment section next time and let the devops engineer to fill in. 
                 window.location.replace("/");
               } else {
                 errorMsg.childNodes[1].innerText = response.msg;
