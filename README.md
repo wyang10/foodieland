@@ -59,7 +59,7 @@ Rate
 - Class Link: https://johnguerra.co/classes/webDevelopment_fall_2022/
 - Professor: <a href="https://johnguerra.co/"> John Alexis Guerra Gómez </a>
 - Release: <a href="https://bloodcurdling-crypt-94860.herokuapp.com/"> Here to Start </a>
-- Demo: <a href="https://www.youtube.com/watch?v=bp1zdDSDM5o"> Video </a>
+- Demo: <a href="https://www.youtube.com/watch?v=bp1zdDSDM5o"> Video </a> Wierdly this Video isn't avaiable when I click onto it, maybe needs double check.
 
 
 
@@ -82,7 +82,7 @@ mongoimport -h localhost:27017 -d foodDB -c foodiehouse --drop --jsonArray --fil
 NOTE: In `./db/myMongoDB.js` make sure the global constant is saying `DB_NAME = "foodDB"`, otherwise the program cannot find the local database.
 
 #### Running locally
-Once the local database has been created, follow these steps to run locally:
+Once the local database has been created, follow these steps to run locally: the website builds with no problem on localhost. Good work.
 1. Run Mongo server: `mongod --dbpath ~/data/db`
 2. Run client server: `npm start`
 3. Using your browser go to localhost: http://locahost:3001/
