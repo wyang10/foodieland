@@ -22,6 +22,10 @@ Nodejs + Express + MongoDB + HTML5 + Heroku
 [Link to Design-Mockup](Design-Mockup.pdf)
 
 ## Screenshots Preview:
+
+<!---
+Hey this readme is very well done and organized, it would be really cool if you guys used soemthing like giphy to make gifs of the functionalities, account is free to make and pretty easy to make those gifs. 
+-->
 Login
 ![](Screenshots/login.png)
 
