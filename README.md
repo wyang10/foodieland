@@ -19,7 +19,7 @@ Nodejs + Express + MongoDB + HTML5 + Heroku
 - Allowed user implement CRUD operations on it. The collections in the database would be based on the length from the user's current location and the numeric ranking of the chosen restaurant.
 
 ## Design Mockup:
-[Link to Design-Mockup](Design-Mockup.pdf)
+[Link to Design-Mockup](Design-Mockup.pdf) The design mock up is very perfessional, better than Drow.io we used in Project II
 
 ## Screenshots Preview:
 Login
@@ -59,7 +59,7 @@ Rate
 - Class Link: https://johnguerra.co/classes/webDevelopment_fall_2022/
 - Professor: <a href="https://johnguerra.co/"> John Alexis Guerra Gómez </a>
 - Release: <a href="https://bloodcurdling-crypt-94860.herokuapp.com/"> Here to Start </a>
-- Demo: <a href="https://www.youtube.com/watch?v=bp1zdDSDM5o"> Video </a>
+- Demo: <a href="https://www.youtube.com/watch?v=bp1zdDSDM5o"> Video </a> This link doesn't seems to work when I click on it, please double check 
 
 
 
@@ -85,7 +85,7 @@ NOTE: In `./db/myMongoDB.js` make sure the global constant is saying `DB_NAME = 
 Once the local database has been created, follow these steps to run locally:
 1. Run Mongo server: `mongod --dbpath ~/data/db`
 2. Run client server: `npm start`
-3. Using your browser go to localhost: http://locahost:3001/
+3. Using your browser go to localhost: http://locahost:3001/ Website works on my local env good work!
 
 ## For simply Clone or Download
 ```terminal
