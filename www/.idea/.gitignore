@@ -3,3 +3,5 @@
 /workspace.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+
+# Actually for the .DS_Store file, you can also added it to gitignore globally as it does not have any relevance on other peoples computers i believe.
