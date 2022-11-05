@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN">  maybe this template/bootstrap is imported with default in Chinese, I recommend change it to lang="EN" when deploying to avoid rendering issues
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -70,7 +70,7 @@
             };
             $.post("http://127.0.0.1:3001/user/register", data, (response) => {
               if (response.success) {
-                window.location.replace("/");
+                window.location.replace("/");     please leave this port address empty for the future project as testers might have different config on their local env, and port for local host is default to 5000. Thanks
               } else {
                 errorMsg.childNodes[1].innerText = response.msg;
                 errorMsg.style.display = "block";
