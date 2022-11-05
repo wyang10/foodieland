@@ -3,3 +3,5 @@
 /workspace.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+.DS_Store
+# probably don't need these mac config files in the repo
