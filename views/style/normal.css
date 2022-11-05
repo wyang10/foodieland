@@ -48,19 +48,19 @@ body {
     color: #666;
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     font-family: "YouYuan", "Microsoft YaHei";
-}
+} Maybe next time configure all font in english? https://www.cnblogs.com/goloving/p/9721328.html This blog helps you to integrate CHN TO ENG for next prject.
 
 @media screen and (max-width: 375px) {
     .iconfont {
         font-size: 24px;
         font-style: normal;
-    }
+    }   the CSS addressing here looks good. 
 }
 @media screen and (min-width: 375px) {
     .iconfont {
         font-size: 26px;
         font-style: normal;
-    }
+    } 
 }
 .clearfix {
     *zoom: 1;
