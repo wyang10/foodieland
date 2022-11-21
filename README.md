@@ -59,7 +59,7 @@ Rate
 - Class Link: https://johnguerra.co/classes/webDevelopment_fall_2022/
 - Professor: <a href="https://johnguerra.co/"> John Alexis Guerra Gómez </a>
 - Release: <a href="https://bloodcurdling-crypt-94860.herokuapp.com/"> Here to Start </a>
-- Demo: <a href="https://www.youtube.com/watch?v=ERiXXZNgCEE"> Video </a>
+- Demo: <a href="https://youtu.be/gls53h6T6Co"> Video </a>
 
 
 
