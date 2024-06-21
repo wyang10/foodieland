@@ -59,13 +59,13 @@ router.post("/login", (req, res) => {
         const isPwdValid = bcrypt.compareSync(password, data.password);
         if (isPwdValid) {
           //password right create token
-          let token = jwt.sign(data, "token", { expiresIn: 60 * 60 * 24 });
+          let token = jwt.sign(data, "token", { expiresIn: 60 * 60 * 24 }); Intersting to see youguys are using JWT token here for authentication, just done a Python/Flask Project with JWT as my flow.
           res.send({
             username: username,
             msg: "Login success!",
             token: token,
             success: true,
-            data: data,
+            data: data,          Payload looks good for JWT token
           });
         } else {
           res.send({
