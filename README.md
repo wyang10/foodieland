@@ -19,7 +19,7 @@ Nodejs + Express + MongoDB + HTML5 + Heroku
 - Allowed user implement CRUD operations on it. The collections in the database would be based on the length from the user's current location and the numeric ranking of the chosen restaurant.
 
 ## Design Mockup:
-[Link to Design-Mockup](Design-Mockup.pdf)
+[Link to Design-Mockup](Design-Mockup.pdf) wow, this mock up is perfessional. It is better than MS visio we used for sure! 
 
 ## Screenshots Preview:
 Login
